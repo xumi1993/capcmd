@@ -1,0 +1,22 @@
+Usage of cap global
+
+1. unzip seed file
+unzip.sh file.seed
+
+2. Remove instrumental response
+transf_IRIS.py directory_name
+
+3. Rotate components
+rot.py directory_name
+
+4. Write time window into SAC header
+pick_t2_t4.sh directory_name
+
+5. Creat weight file
+genweight.sh directory_name
+
+6. Set parameters and run cap
+run_cap.sh directory_name
+
+7. generate real depth using depth search (Option)
+genrealdepth.sh directory_name
