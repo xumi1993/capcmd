@@ -8,7 +8,7 @@ import subprocess
 
 ddir = sys.argv[1]
 in_dir = "%s/ground_vel" % ddir
-out_dir = "%s/data" % ddir
+out_dir = "%s/rot_dir" % ddir
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)
 stations = []
@@ -16,19 +16,19 @@ isNE = 0
 os.putenv("SAC_DISPLAY_COPYRIGHT", '0')
 p = subprocess.Popen(['sac'], stdin=subprocess.PIPE)
 s = ""
-for sac in glob.glob(in_dir+'/*.??Z.*.SAC'):
+for sac in glob.glob(in_dir+'/*.?HZ'):
     sacname = os.path.basename(sac)
-    netname = sacname.split('.')[6]
-    staname = sacname.split('.')[7]
-    location = sacname.split('.')[8]
+    netname = sacname.split('.')[0]
+    staname = sacname.split('.')[1]
+    location = sacname.split('.')[2]
     print(join(out_dir,netname+'.'+staname+'.'+location+'.r'))
     try:
-        fl_1 = glob.glob(in_dir+'/*.'+netname+'.'+staname+'.'+location+'*.??1.*.SAC')[0]
-        fl_2 = glob.glob(in_dir+'/*.'+netname+'.'+staname+'.'+location+'*.??2.*.SAC')[0]
+        fl_1 = glob.glob(in_dir+'/'+netname+'.'+staname+'.'+location+'.?H1')[0]
+        fl_2 = glob.glob(in_dir+'/'+netname+'.'+staname+'.'+location+'.?H2')[0]
     except:
         try:
-            fl_1 = glob.glob(in_dir+'/*.'+netname+'.'+staname+'.'+location+'*.??E.*.SAC')[0]
-            fl_2 = glob.glob(in_dir+'/*.'+netname+'.'+staname+'.'+location+'*.??N.*.SAC')[0]
+            fl_1 = glob.glob(in_dir+'/'+netname+'.'+staname+'.'+location+'.?HE')[0]
+            fl_2 = glob.glob(in_dir+'/'+netname+'.'+staname+'.'+location+'.?HN')[0]
             isNE = 1
         except:
             continue
@@ -93,7 +93,7 @@ for sac in glob.glob(in_dir+'/*.??Z.*.SAC'):
     e -= 0.1
     s += "cut off\ncut %f %f\n" % (b, e)
     s += "r %s %s\n" % (fl_1, fl_2)
-    s += "rot to gap\n"
+    s += "rot to gcp\n"
     s += "w %s %s\n" % (join(out_dir,netname+'.'+staname+'.'+location+'.r'), join(out_dir,netname+'.'+staname+'.'+location+'.t'))
     s += "cut off\n"
     shutil.copy(sac, join(out_dir,netname+'.'+staname+'.'+location+'.z'))

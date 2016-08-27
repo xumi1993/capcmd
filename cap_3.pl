@@ -18,8 +18,8 @@
 # $cap= $ENV{HOME}."/bin/cap_forward_distbp";
 
 
-#require $ENV{CAPCMDHOME}."/cap_plt_3.pl";	# include plot script
-require $ENV{CAPCMDHOME}."/cap_plt_addpoint_new.pl";	# include plot script
+require $ENV{CAPCMDHOME}."/cap_plt_2dc.pl";	# include plot script
+#require $ENV{CAPCMDHOME}."/cap_plt_addpoint_new.pl";	# include plot script
 #require "cap_plt.pl"
 
 # command line input, [] means optional, see () for default value

@@ -1,5 +1,5 @@
 #!/bin/sh
-dir=$1/data
+dir=$1/rot_dir
 nowdir=`pwd`
 cd $dir
 #saclst dist az f $dir/*.z   | awk '{gsub(".z","",$1); print $1,$2,$2,"0 0 0 0 0 0 0 0"}' | sort -n --key=3 > $dir/weight.dat
