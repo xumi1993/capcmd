@@ -1,0 +1,8 @@
+r $1
+chnhdr o gmt  2016 237 13 36 33 000
+evaluate to tt1 &1,o * -1
+chnhdr allt %tt1
+ch evla 42.7068
+ch evlo 13.1763
+ch evdp 10.00
+writehdr

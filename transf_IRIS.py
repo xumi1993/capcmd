@@ -11,7 +11,7 @@ if not os.path.exists("%s/ground_vel" % ddir):
     os.makedirs("%s/ground_vel" % ddir) # Make a new directory to save new SAC files
 dt = 0.5 # Set sampling interval to resample
 fl_z = glob.glob("%s/*.?H?" % ddir) # Match each eventsa
-stations = [[os.path.basename(fl).split('.')[0], os.path.basename(fl).split('.')[1], os.path.basename(fl).split('.')[-2]] for fl in fl_z] # Get station infomation (network, station, location)
+stations = [[os.path.basename(fl).split('.')[6], os.path.basename(fl).split('.')[7], os.path.basename(fl).split('.')[8]] for fl in fl_z] # Get station infomation (network, station, location)
 os.putenv("SAC_DISPLAY_COPYRIGHT", '0')
 p = subprocess.Popen(['sac'], stdin=subprocess.PIPE)
 s = '' # Open SAC macro
@@ -25,8 +25,6 @@ for sta in stations:
         s += "transfer FROM POLEZERO SUBTYPE %s TO VEL freq 0.004 0.005 10 12\n" % resfile # Remove instrumental response with a filter after deconvolution
         s += "rtr\nrmean\n"
         s += "mul 100\n" # Convert the unit of amplitude to cm 
-#        s += "int\n"
-#        s += "interp delta 0.5\n" # Resample
         s += "w %s/ground_vel/%s\n" %(ddir, sacname) # write SAC file
 s += "q\n"
 p.communicate(s.encode()) # execute SAC macro
