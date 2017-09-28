@@ -87,14 +87,16 @@ foreach $fl (@fl){
 	print SAC "r $file_h1 $file_h2\n";
 	print     "r $file_h1 $file_h2\n";
 	print SAC "rot to gcp\n";
-#    	print SAC "interpolate delta 0.1\n";
+    print SAC "lp c 4.5\n";
+    print SAC "interpolate delta 0.5\n";
 	print SAC "w $ddir/$dir/${tmp2}r $ddir/$dir/${tmp2}t\n";
 	print SAC "q\n";
 	close(SAC);
 	`cp $ddir/ground_vel/${tmp}Z $ddir/$dir/${tmp2}z`; 
  	open(SAC,"|sac");
 	print SAC "r $ddir/$dir/${tmp2}z\n";
-#    	print SAC "interpolate delta 0.1\n";
+    print SAC "lp c 4.5\n";
+  	print SAC "interpolate delta 0.5\n";
 	print SAC "w over\n";
 	print SAC "q\n";
 	close(SAC);
